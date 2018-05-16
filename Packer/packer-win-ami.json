@@ -22,6 +22,7 @@
       "subnet_id": "{{user `subnet_id`}}",
       "ssh_keypair_name": "{{user `ssh_keypair_name`}}",
       "ssh_private_key_file": "{{user `ssh_private_key_file`}}",
+      "associate_public_ip_address": true,
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
@@ -67,11 +68,13 @@
     {
       "type": "powershell",
       "inline": [
-        "wget --header 'Cookie: oraclelicense=accept-securebackup-cookie'  'http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jre-8u171-windows-x64.exe' -Outfile 'C:\\jreinstaller.exe'",
-        "Start-Process -filepath C:\\jreinstaller.exe -passthru -wait -argumentlist \"/s\",\"INSTALLDIR=c:\\Java\\jre1.8.0_171\" ",
-        "del C:\\jreinstaller.exe",
-        "$env:JAVA_HOME= \"c:\\Java\\jre1.8.0_171\"",
-        "setx PATH \"$env:path;c:\\Java\\jre1.8.0_171\\bin\""
+        "Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "choco install javaruntime -y"
       ]
     },
     {

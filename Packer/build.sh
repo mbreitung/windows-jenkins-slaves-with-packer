@@ -14,8 +14,10 @@ fi
 echo "using $AWS_OPTS"
 
 #vpc-4706be23
+#  --debug \
 
-packer build -var region=$(aws $AWS_OPTS configure get region) \
+packer build \
+  -var region=$(aws $AWS_OPTS configure get region) \
   -var instance_type=t2.large \
   -var aws_access_key=$(aws $AWS_OPTS configure get aws_access_key_id) \
   -var aws_secret_key=$(aws $AWS_OPTS configure get aws_secret_access_key) \

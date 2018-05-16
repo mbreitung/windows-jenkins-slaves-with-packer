@@ -25,8 +25,8 @@ write-output "Setting up WinRM"
 write-host "(host) setting up WinRM"
 
 # Set administrator password
-net user Administrator SuperS3cr3t!
-wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
+#net user Administrator SuperS3cr3t!
+#wmic useraccount where "name='Administrator'" set PasswordExpires=FALSE
 
 # First, make sure WinRM can't be connected to
 netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new enable=yes action=block
@@ -55,5 +55,7 @@ Stop-Service -Name WinRM
 Set-Service -Name WinRM -StartupType Automatic
 netsh advfirewall firewall set rule name="Windows Remote Management (HTTP-In)" new action=allow localip=any remoteip=any
 Start-Service -Name WinRM
+
+mkdir c:\Jenkins
 
 </powershell>
