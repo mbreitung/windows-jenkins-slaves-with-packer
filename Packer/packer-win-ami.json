@@ -74,13 +74,21 @@
     {
       "type": "powershell",
       "inline": [
-        "choco install javaruntime -y"
+        "choco install javaruntime -y",
+        "choco install openssh -y -params \'\"/SSHServerFeature\"\'"
       ]
     },
     {
       "type": "powershell",
       "inline": [
         "java -version"
+      ]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "net user Administrator changeme2018!Sysdig",
+        "wmic useraccount where \"name='Administrator'\" set PasswordExpires=FALSE"
       ]
     }
   ],
